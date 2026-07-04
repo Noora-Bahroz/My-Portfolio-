@@ -1,7 +1,7 @@
 # Noora Bahroz — Cinematic Portfolio
 
 A continuous cinematic scrolling portfolio website built with GSAP ScrollTrigger. The entire site feels like one scrolling film — no hard cuts, no black gaps, every transition is smooth and scroll-driven.
-
+**Live Site:** [https://my-portfolio-aabo.vercel.app/](https://my-portfolio-aabo.vercel.app/)
 
 
 ---
