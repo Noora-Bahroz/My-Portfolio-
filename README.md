@@ -2,7 +2,7 @@
 
 A continuous cinematic scrolling portfolio website built with GSAP ScrollTrigger. The entire site feels like one scrolling film — no hard cuts, no black gaps, every transition is smooth and scroll-driven.
 
-**Live Site:** [https://noora-bahroz.vercel.app](https://noora-bahroz.vercel.app)
+
 
 ---
 
