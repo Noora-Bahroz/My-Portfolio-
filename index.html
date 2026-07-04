@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noora Bahroz - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        html {
+            background: #0a0a0a;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 100%) fixed;
+        }
+    
+        .site-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .welcome-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 15vw, 180px);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            text-shadow: 0 0 80px rgba(138, 43, 226, 0.3);
+            filter: blur(0px);
+            will-change: opacity;
+            white-space: nowrap;
+        }
+
+        .spacer {
+            width: 100%;
+            height: 400vh;
+            pointer-events: none;
+        }
+
+        .pin-wrap {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .ambient-light {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(138, 43, 226, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            z-index: 10;
+        }
+
+        .portfolio-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(100px, 20vw, 248px);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-shadow:
+                0 0 40px rgba(138, 43, 226, 0.4),
+                0 0 80px rgba(0, 255, 255, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.8);
+            line-height: 0.9;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.7;
+            will-change: transform, opacity;
+        }
+
+   .character-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 20;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    pointer-events: none;
+    will-change: transform;
+}
+
+        .character-base {
+            height: 170vh;
+            width: auto;
+             position: relative;
+            transform: translateY(8vh);
+            bottom: -180px;
+            display: block;
+            filter: drop-shadow(0 0 60px rgba(138, 43, 226, 0.5));
+        }
+
+        .name-section {
+            position: absolute;
+            left: 5%;
+            top: 65%;
+            z-index: 10;
+        }
+
+        .name {
+            font-size: clamp(20px, 2.5vw, 32px);
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+            text-transform: uppercase;
+        }
+
+        .title {
+            font-size: clamp(14px, 1.4vw, 18px);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        .vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.6) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image:
+                linear-gradient(0deg, transparent 24%, rgba(138, 43, 226, 0.05) 25%, rgba(138, 43, 226, 0.05) 26%, transparent 27%, transparent 74%, rgba(138, 43, 226, 0.05) 75%, rgba(138, 43, 226, 0.05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(138, 43, 226, 0.05) 25%, rgba(138, 43, 226, 0.05) 26%, transparent 27%, transparent 74%, rgba(138, 43, 226, 0.05) 75%, rgba(138, 43, 226, 0.05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+
+        /* Content overlay — appears on scroll */
+        .content-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 30;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .content-left {
+            position: absolute;
+            left: 5%;
+            top: 12%;
+            max-width: 480px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .hero-heading {
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-heading h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            text-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+            letter-spacing: 0.03em;
+        }
+
+        .hero-heading h2 {
+            font-size: clamp(12px, 1vw, 16px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.3rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .about-text {
+            font-size: clamp(11px, 0.85vw, 13px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin: 0.8rem 0 0 0;
+            max-width: none;
+            width: 100%;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 18px;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+
+        .social-icon:hover {
+            background: rgba(138, 43, 226, 0.2);
+            border-color: rgba(138, 43, 226, 0.4);
+            color: #ffffff;
+            transform: scale(1.15);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.3);
+        }
+
+        /* ─── Testimonials Section ─── */
+        .testimonials {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 25;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 6vw, 96px);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            text-shadow: 0 0 40px rgba(138, 43, 226, 0.3);
+            line-height: 1;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .testimonials-header p {
+            font-size: clamp(13px, 1.2vw, 17px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-top: 0.75rem;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .marquee-wrap {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 0.75rem 0;
+        }
+
+        .marquee-wrap::before,
+        .marquee-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .marquee-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+        }
+
+        .marquee-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: fit-content;
+            will-change: transform;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 2rem;
+            padding: 0 1rem;
+            flex-shrink: 0;
+        }
+
+        .marquee-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.2rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.9rem 1.5rem;
+            white-space: nowrap;
+            opacity: 0.92;
+        }
+
+        .marquee-item .name {
+            font-size: clamp(13px, 0.95vw, 15px);
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.03em;
+        }
+
+        .marquee-item .msg {
+            font-size: clamp(11px, 0.85vw, 13px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.02em;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ─── My Work Section ─── */
+        .my-work {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .my-work-header {
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            transform: translate(-50%, 80px);
+        }
+
+        .my-work-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(64px, 8vw, 120px);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.03em;
+            text-shadow: 0 0 60px rgba(138, 43, 226, 0.3);
+            line-height: 1;
+        }
+
+        .cards-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-card {
+            position: absolute;
+            width: clamp(180px, 16vw, 260px);
+            aspect-ratio: 3/4;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                        box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .project-card:hover {
+            filter: brightness(1.15);
+            box-shadow:
+                0 12px 48px rgba(138, 43, 226, 0.25),
+                0 0 30px rgba(138, 43, 226, 0.15);
+            border-color: rgba(138, 43, 226, 0.3);
+        }
+
+        .project-card .card-img {
+            width: 100%;
+            height: 55%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .project-card .card-body {
+            padding: 1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .project-card .card-title {
+            font-size: clamp(14px, 1.1vw, 18px);
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-card .card-tech {
+            font-size: clamp(10px, 0.75vw, 12px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Card z-index layering */
+        #card1 { z-index: 4; }
+        #card2 { z-index: 3; }
+        #card3 { z-index: 2; }
+        #card4 { z-index: 1; }
+
+        /* ─── Services Section ─── */
+        .services {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .services-ambient {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .services-ambient > div {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            will-change: opacity;
+        }
+
+        .services-ambient .ag-yellow { background: radial-gradient(ellipse at 50% 30%, rgba(255, 200, 0, 0.1) 0%, transparent 60%); }
+        .services-ambient .ag-orange { background: radial-gradient(ellipse at 50% 30%, rgba(255, 150, 0, 0.1) 0%, transparent 60%); }
+        .services-ambient .ag-purple { background: radial-gradient(ellipse at 50% 30%, rgba(150, 50, 255, 0.1) 0%, transparent 60%); }
+        .services-ambient .ag-red     { background: radial-gradient(ellipse at 50% 30%, rgba(255, 50, 50, 0.1) 0%, transparent 60%); }
+
+        .services-title {
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translate(-50%, 80px);
+            z-index: 6;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .services-title h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(80px, 12vw, 200px);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            text-shadow:
+                0 0 60px rgba(138, 43, 226, 0.3),
+                0 0 120px rgba(138, 43, 226, 0.15);
+        }
+
+        .services-cards-wrap {
+            position: absolute;
+            top: 38%;
+            width: 100%;
+            overflow: hidden;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .services-cards-wrap::before,
+        .services-cards-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .services-cards-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+        }
+
+        .services-cards-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, #0a0a0a 0%, transparent 100%);
+        }
+
+        .services-track {
+            display: flex;
+            width: fit-content;
+            will-change: transform;
+        }
+
+        .services-track-set {
+            display: flex;
+            gap: 2rem;
+            padding: 0 1rem;
+            flex-shrink: 0;
+        }
+
+        .service-card {
+            width: 340px;
+            padding: 2rem 1.8rem;
+            border-radius: 20px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                        border-color 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: auto;
+            will-change: transform;
+        }
+
+        .service-card .sc-category {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-card .sc-category .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 12px currentColor;
+        }
+
+        .service-card .sc-title {
+            font-size: clamp(18px, 1.4vw, 22px);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .service-card .sc-desc {
+            font-size: clamp(12px, 0.85vw, 14px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.7;
+        }
+
+        .service-card .sc-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+        }
+
+        .service-card .sc-skills span {
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* Service card theme colors */
+        .service-card.theme-yellow { border-color: rgba(255, 200, 0, 0.15); }
+        .service-card.theme-yellow .sc-title { color: #f6d365; }
+        .service-card.theme-yellow .dot { color: #f6d365; background: #f6d365; box-shadow: 0 0 12px #f6d365; }
+        .service-card.theme-yellow:hover { border-color: rgba(255, 200, 0, 0.3); box-shadow: 0 12px 48px rgba(255, 200, 0, 0.08), 0 8px 32px rgba(0,0,0,0.4); }
+
+        .service-card.theme-orange { border-color: rgba(255, 150, 0, 0.15); }
+        .service-card.theme-orange .sc-title { color: #f7971e; }
+        .service-card.theme-orange .dot { color: #f7971e; background: #f7971e; box-shadow: 0 0 12px #f7971e; }
+        .service-card.theme-orange:hover { border-color: rgba(255, 150, 0, 0.3); box-shadow: 0 12px 48px rgba(255, 150, 0, 0.08), 0 8px 32px rgba(0,0,0,0.4); }
+
+        .service-card.theme-purple { border-color: rgba(150, 50, 255, 0.15); }
+        .service-card.theme-purple .sc-title { color: #a18cd1; }
+        .service-card.theme-purple .dot { color: #a18cd1; background: #a18cd1; box-shadow: 0 0 12px #a18cd1; }
+        .service-card.theme-purple:hover { border-color: rgba(150, 50, 255, 0.3); box-shadow: 0 12px 48px rgba(150, 50, 255, 0.08), 0 8px 32px rgba(0,0,0,0.4); }
+
+        .service-card.theme-red { border-color: rgba(255, 50, 50, 0.15); }
+        .service-card.theme-red .sc-title { color: #f12711; }
+        .service-card.theme-red .dot { color: #f12711; background: #f12711; box-shadow: 0 0 12px #f12711; }
+        .service-card.theme-red:hover { border-color: rgba(255, 50, 50, 0.3); box-shadow: 0 12px 48px rgba(255, 50, 50, 0.08), 0 8px 32px rgba(0,0,0,0.4); }
+
+        /* ─── Contact Section ─── */
+        .contact {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8vh 2rem 6rem;
+            overflow: hidden;
+        }
+
+        .contact-title {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(100px);
+            pointer-events: none;
+            margin-top: 4vh;
+            margin-bottom: 3rem;
+        }
+
+        .contact-title h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(64px, 10vw, 160px);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            text-shadow:
+                0 0 60px rgba(138, 43, 226, 0.3),
+                0 0 120px rgba(138, 43, 226, 0.15);
+        }
+
+        .contact-socials {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 3rem;
+            z-index: 2;
+        }
+
+        .contact-social {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .contact-social:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            transform: scale(1.12);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-social svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .contact-form {
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 2;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.4rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 300;
+            outline: none;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
+            letter-spacing: 0.03em;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: rgba(138, 43, 226, 0.4);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.08);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            width: 100%;
+            max-width: 520px;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ─── Finale Section ─── */
+        .finale {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6vh 2rem 2rem;
+        }
+
+        .finale-atmosphere {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse at 50% 20%, rgba(80, 0, 120, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 70%, rgba(30, 0, 60, 0.15) 0%, transparent 50%);
+            opacity: 0;
+        }
+
+        .finale-char {
+            position: relative;
+            z-index: 3;
+            height: 60vh;
+            width: auto;
+            pointer-events: none;
+            margin-top: 1rem;
+            filter: drop-shadow(0 0 80px rgba(138, 43, 226, 0.5)) drop-shadow(0 0 160px rgba(138, 43, 226, 0.3));
+            opacity: 0;
+            transform: translateY(80px);
+            will-change: transform;
+        }
+
+        .finale-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .finale-btn {
+            padding: 0.8rem 2.4rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(16px);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .finale-btn:hover {
+            background: rgba(138, 43, 226, 0.15);
+            border-color: rgba(138, 43, 226, 0.6);
+            transform: scale(1.06);
+            box-shadow:
+                0 0 30px rgba(138, 43, 226, 0.2),
+                0 0 60px rgba(138, 43, 226, 0.1);
+        }
+
+        .finale-name {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .finale-name h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.08em;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(138, 43, 226, 0.3);
+        }
+
+        .finale-name .subtitle {
+            font-size: clamp(12px, 1vw, 15px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+
+
+        .finale-feedback {
+            position: absolute;
+            top: 3%;
+            right: 3%;
+            z-index: 5;
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .finale-feedback:hover {
+            background: rgba(138, 43, 226, 0.12);
+            border-color: rgba(138, 43, 226, 0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.15);
+        }
+
+        .finale-nav {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            gap: 2.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .finale-nav a {
+            font-size: clamp(12px, 0.85vw, 14px);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .finale-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: rgba(138, 43, 226, 0.6);
+            transition: width 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .finale-nav a:hover {
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+        }
+
+        .finale-nav a:hover::after {
+            width: 100%;
+        }
+
+        .finale-bottom {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            margin-top: 2.5rem;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .finale-bottom .copyright {
+            font-size: clamp(11px, 0.75vw, 13px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.05em;
+        }
+
+        .finale-bottom .legal {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .finale-bottom .legal a {
+            font-size: clamp(10px, 0.7vw, 12px);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.25);
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: color 0.3s ease;
+        }
+
+        .finale-bottom .legal a:hover {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ─── Finale Floating Nav ─── */
+        .finale-floating-nav {
+            position: fixed;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            z-index: 100;
+            display: flex;
+            gap: 0.3rem;
+            align-items: center;
+            padding: 0.5rem 0.7rem;
+            border-radius: 50px;
+            background: rgba(15, 15, 30, 0.65);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(138, 43, 226, 0.15);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(138, 43, 226, 0.06);
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .finale-floating-nav a {
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .finale-floating-nav a:hover {
+            color: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.06);
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+        }
+
+        .finale-floating-nav .ffn-feedback {
+            background: rgba(255, 255, 255, 0.88);
+            color: #0a0a0a;
+            font-weight: 500;
+            padding: 0.35rem 1.2rem;
+        }
+
+        .finale-floating-nav .ffn-feedback:hover {
+            background: #ffffff;
+            color: #0a0a0a;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .content-left {
+                left: 4%;
+                right: 4%;
+                max-width: none;
+                top: 10%;
+            }
+            .about-text {
+                max-width: none;
+            }
+            .character-base {
+                height: 70vh;
+            }
+            .services-title {
+                margin-top: 30vh;
+            }
+            .services-title h2 {
+                font-size: clamp(60px, 18vw, 100px);
+            }
+            .service-card {
+                width: 260px;
+                padding: 1.5rem;
+            }
+            .services-cards-wrap {
+                top: 40%;
+            }
+            .services-cards-wrap::before,
+            .services-cards-wrap::after {
+                width: 60px;
+            }
+            .contact-socials {
+                gap: 1.2rem;
+            }
+            .contact-social {
+                width: 56px;
+                height: 56px;
+            }
+            .contact-social svg {
+                width: 24px;
+                height: 24px;
+            }
+            .contact-form {
+                max-width: 100%;
+            }
+            .contact-btn {
+                max-width: 100%;
+            }
+            .contact-title h2 {
+                font-size: clamp(48px, 14vw, 80px);
+            }
+            .finale-char {
+                height: 45vh;
+            }
+            .finale-buttons {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            .finale-btn {
+                padding: 0.6rem 1.6rem;
+                font-size: 12px;
+            }
+            .finale-nav {
+                gap: 1.5rem;
+            }
+            .finale-feedback {
+                top: 2%;
+                right: 2%;
+                padding: 0.4rem 1rem;
+                font-size: 10px;
+            }
+            .finale-floating-nav {
+                gap: 0.15rem;
+                padding: 0.4rem 0.5rem;
+                top: 2%;
+            }
+            .finale-floating-nav a {
+                padding: 0.25rem 0.6rem;
+                font-size: 10px;
+            }
+            .finale-floating-nav .ffn-feedback {
+                padding: 0.25rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-wrapper">
+    <div class="pin-wrap" id="pinWrap">
+        <div class="welcome-text" id="welcomeText">WELCOME</div>
+
+        <div class="ambient-light"></div>
+
+        <div class="scene" id="scene">
+            <div class="portfolio-text" id="portfolioText">PORTFOLIO</div>
+
+            <div class="character-container" id="characterContainer">
+                <img class="character-base" id="characterBase" src="Jinx 1.png" alt="Jinx" />
+            </div>
+
+            <div class="name-section" id="nameSection">
+                <div class="name" id="nameEl">Noora Bahroz</div>
+                <div class="title" id="titleEl">Frontend Developer</div>
+            </div>
+
+            
+       
+
+        <!-- Content revealed on scroll -->
+        <div class="content-overlay" id="contentOverlay">
+            <div class="content-left" id="contentLeft">
+                <div class="hero-heading">
+                    <h1 id="heroHeading">Hi, I'm Noora Bahroz</h1>
+                    <h2 id="heroSubtitle">Frontend Developer</h2>
+                </div>
+                <p class="about-text" id="aboutText">
+                   I am a Front-End Developer and React Native developer who enjoys building modern, responsive, and user-friendly web and mobile applications. I have a strong understanding of UI design principles and focus on creating clean and visually appealing interfaces.
+
+I can develop mobile applications using React Native and build responsive front-end interfaces. I am comfortable working with layouts, components, and navigation structures, and I enjoy turning ideas into functional applications.
+
+I am continuously learning and improving my skills in application development, design, and user experience to create better and more efficient digital products.
+                <div class="social-icons" id="socialIcons">
+                    <a href="#" class="social-icon" target="_blank" title="WhatsApp">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" target="_blank" title="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" target="_blank" title="LinkedIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" class="social-icon" target="_blank" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ─── Testimonials Section (inside pin-wrap) ─── -->
+        <div class="testimonials" id="testimonials">
+            <div class="testimonials-header" id="testimonialsHeader">
+                <h2 id="clientLoveTitle">CLIENT LOVE</h2>
+                <p id="clientLoveSubtitle">What people are saying</p>
+            </div>
+
+            <!-- Line 1 — moves RIGHT → LEFT -->
+            <div class="marquee-wrap">
+                <div class="marquee-track" id="marqueeTrack1">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="name">John Doe</span><span class="msg">Loved the UI design, super clean and professional!</span></div>
+                        <div class="marquee-item"><span class="name">Ayesha Khan</span><span class="msg">The animations are smooth and the design feels premium.</span></div>
+                        <div class="marquee-item"><span class="name">Ali Raza</span><span class="msg">Very modern frontend work, highly recommended.</span></div>
+                        <div class="marquee-item"><span class="name">Emma Johnson</span><span class="msg">The design quality is beyond expectations.</span></div>
+                        <div class="marquee-item"><span class="name">Michael Smith</span><span class="msg">Clean code structure and amazing UX flow.</span></div>
+                    </div>
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="name">John Doe</span><span class="msg">Loved the UI design, super clean and professional!</span></div>
+                        <div class="marquee-item"><span class="name">Ayesha Khan</span><span class="msg">The animations are smooth and the design feels premium.</span></div>
+                        <div class="marquee-item"><span class="name">Ali Raza</span><span class="msg">Very modern frontend work, highly recommended.</span></div>
+                        <div class="marquee-item"><span class="name">Emma Johnson</span><span class="msg">The design quality is beyond expectations.</span></div>
+                        <div class="marquee-item"><span class="name">Michael Smith</span><span class="msg">Clean code structure and amazing UX flow.</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Line 2 — moves LEFT → RIGHT -->
+            <div class="marquee-wrap">
+                <div class="marquee-track" id="marqueeTrack2">
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="name">Sara Ahmed</span><span class="msg">Delivered exactly what was needed, very creative approach.</span></div>
+                        <div class="marquee-item"><span class="name">David Brown</span><span class="msg">One of the best developers I've worked with.</span></div>
+                        <div class="marquee-item"><span class="name">Sophia Lee</span><span class="msg">Smooth animations and premium feel UI.</span></div>
+                        <div class="marquee-item"><span class="name"> Premium Production</span><span class="msg">Feels like a high-end website, not just a portfolio.</span></div>
+                        <div class="marquee-item"><span class="name"> Frontend Review</span><span class="msg">This level of polish is rare in modern portfolios.</span></div>
+                    </div>
+                    <div class="marquee-content">
+                        <div class="marquee-item"><span class="name">Sara Ahmed</span><span class="msg">Delivered exactly what was needed, very creative approach.</span></div>
+                        <div class="marquee-item"><span class="name">David Brown</span><span class="msg">One of the best developers I've worked with.</span></div>
+                        <div class="marquee-item"><span class="name">Sophia Lee</span><span class="msg">Smooth animations and premium feel UI.</span></div>
+                        <div class="marquee-item"><span class="name"> Premium Production</span><span class="msg">Feels like a high-end website, not just a portfolio.</span></div>
+                        <div class="marquee-item"><span class="name"> Frontend Review</span><span class="msg">This level of polish is rare in modern portfolios.</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vignette"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="spacer" id="spacer"></div>
+</div>
+
+<!-- ─── MY WORK Section ─── -->
+<section class="my-work" id="myWork">
+    <div class="my-work-header" id="myWorkHeader">
+        <h2>MY WORK</h2>
+    </div>
+
+    <div class="cards-container" id="cardsContainer">
+        <a class="project-card" id="card1" href="https://github.com/Noora-Bahroz/CodeAlpha_ImageGallery" target="_blank" rel="noopener">
+            <div class="card-img" style="background-image: url('image gallery.png'); background-size: cover; background-position: center;"></div>
+            <div class="card-body">
+                <div class="card-title">Image Gallery</div>
+                <div class="card-tech">React • Masonry • API</div>
+            </div>
+        </a>
+
+        <a class="project-card" id="card2" href="https://github.com/Noora-Bahroz/Blood-Group-Management-System" target="_blank" rel="noopener">
+            <div class="card-img" style="background-image: url('blood grp mng sys.png'); background-size: cover; background-position: center;"></div>
+            <div class="card-body">
+                <div class="card-title">Blood Group Mgmt</div>
+                <div class="card-tech">PHP • MySQL • Bootstrap</div>
+            </div>
+        </a>
+
+        <a class="project-card" id="card3" href="https://github.com/Noora-Bahroz/CodeAlpha_Music-Player" target="_blank" rel="noopener">
+            <div class="card-img" style="background-image: url('music player.png'); background-size: cover; background-position: center;"></div>
+            <div class="card-body">
+                <div class="card-title">Music Player</div>
+                <div class="card-tech">JavaScript • Audio API • UI</div>
+            </div>
+        </a>
+
+        <a class="project-card" id="card4" href="https://github.com/Noora-Bahroz/E-commerce-NovaCart" target="_blank" rel="noopener">
+            <div class="card-img" style="background-image: url('e commerce novacart.png'); background-size: cover; background-position: center;"></div>
+            <div class="card-body">
+                <div class="card-title">NovaCart Ecommerce</div>
+                <div class="card-tech">React Native • Firebase • Stripe</div>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- ─── SERVICES Section ─── -->
+<section class="services" id="services">
+    <div class="services-ambient">
+        <div class="ag-yellow" id="agYellow"></div>
+        <div class="ag-orange" id="agOrange"></div>
+        <div class="ag-purple" id="agPurple"></div>
+        <div class="ag-red" id="agRed"></div>
+    </div>
+
+    <div class="services-title" id="servicesTitle">
+        <h2>SERVICES</h2>
+    </div>
+
+    <div class="services-cards-wrap">
+        <div class="services-track" id="servicesTrack">
+            <div class="services-track-set">
+                <div class="service-card theme-yellow">
+                    <div class="sc-category"><span class="dot"></span> Frontend</div>
+                    <div class="sc-title">Frontend Developer</div>
+                    <div class="sc-desc">Building modern, responsive, and visually polished interfaces with smooth animations and clean user experiences.</div>
+                    <div class="sc-skills">
+                        <span>React</span>
+                        <span>Vue</span>
+                        <span>GSAP</span>
+                        <span>Tailwind</span>
+                    </div>
+                </div>
+                <div class="service-card theme-orange">
+                    <div class="sc-category"><span class="dot"></span> Full Stack</div>
+                    <div class="sc-title">Full Stack Developer</div>
+                    <div class="sc-desc">Creating scalable full-stack applications with frontend precision and strong backend architecture.</div>
+                    <div class="sc-skills">
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>React</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+                <div class="service-card theme-purple">
+                    <div class="sc-category"><span class="dot"></span> Mobile</div>
+                    <div class="sc-title">Mobile App Developer</div>
+                    <div class="sc-desc">Developing high-performance Android and cross-platform mobile applications with modern UI systems.</div>
+                    <div class="sc-skills">
+                        <span>Flutter</span>
+                        <span>React Native</span>
+                        <span>Firebase</span>
+                        <span>Kotlin</span>
+                    </div>
+                </div>
+                <div class="service-card theme-red">
+                    <div class="sc-category"><span class="dot"></span> UI/UX</div>
+                    <div class="sc-title">UI/UX Designer</div>
+                    <div class="sc-desc">Designing cinematic user experiences with premium layouts, intuitive flows, and aesthetic visual systems.</div>
+                    <div class="sc-skills">
+                        <span>Figma</span>
+                        <span>Prototyping</span>
+                        <span>Design Systems</span>
+                        <span>Motion</span>
+                    </div>
+                </div>
+            </div>
+            <div class="services-track-set">
+                <div class="service-card theme-yellow">
+                    <div class="sc-category"><span class="dot"></span> Frontend</div>
+                    <div class="sc-title">Frontend Developer</div>
+                    <div class="sc-desc">Building modern, responsive, and visually polished interfaces with smooth animations and clean user experiences.</div>
+                    <div class="sc-skills">
+                        <span>React</span>
+                        <span>Vue</span>
+                        <span>GSAP</span>
+                        <span>Tailwind</span>
+                    </div>
+                </div>
+                <div class="service-card theme-orange">
+                    <div class="sc-category"><span class="dot"></span> Full Stack</div>
+                    <div class="sc-title">Full Stack Developer</div>
+                    <div class="sc-desc">Creating scalable full-stack applications with frontend precision and strong backend architecture.</div>
+                    <div class="sc-skills">
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>React</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+                <div class="service-card theme-purple">
+                    <div class="sc-category"><span class="dot"></span> Mobile</div>
+                    <div class="sc-title">Mobile App Developer</div>
+                    <div class="sc-desc">Developing high-performance Android and cross-platform mobile applications with modern UI systems.</div>
+                    <div class="sc-skills">
+                        <span>Flutter</span>
+                        <span>React Native</span>
+                        <span>Firebase</span>
+                        <span>Kotlin</span>
+                    </div>
+                </div>
+                <div class="service-card theme-red">
+                    <div class="sc-category"><span class="dot"></span> UI/UX</div>
+                    <div class="sc-title">UI/UX Designer</div>
+                    <div class="sc-desc">Designing cinematic user experiences with premium layouts, intuitive flows, and aesthetic visual systems.</div>
+                    <div class="sc-skills">
+                        <span>Figma</span>
+                        <span>Prototyping</span>
+                        <span>Design Systems</span>
+                        <span>Motion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── CONTACT Section ─── -->
+<section class="contact" id="contact">
+    <div class="contact-title" id="contactTitle">
+        <h2>LET'S TALK</h2>
+    </div>
+
+    <div class="contact-socials" id="contactSocials">
+        <a href="#" class="contact-social" target="_blank" title="WhatsApp">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+        <a href="#" class="contact-social" target="_blank" title="Instagram">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="contact-social" target="_blank" title="LinkedIn">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="contact-social" target="_blank" title="GitHub">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+    </div>
+
+    <form class="contact-form" id="contactForm">
+        <input type="text" placeholder="Your Name" id="formName" />
+        <input type="email" placeholder="Your Email" id="formEmail" />
+        <textarea placeholder="Your Message" id="formMessage"></textarea>
+    </form>
+
+    <button class="contact-btn" id="contactBtn">SEND</button>
+</section>
+
+<!-- ─── FINALE Section ─── -->
+<section class="finale" id="finale">
+    <div class="finale-floating-nav" id="finaleFloatingNav">
+        <a href="#" class="ffn-feedback" data-target="feedback">Feedback</a>
+        <a href="#" data-target="contact">Contact</a>
+        <a href="#" data-target="services">Services</a>
+        <a href="#" data-target="portfolio">Portfolio</a>
+        <a href="#" data-target="about">About</a>
+        <a href="#" data-target="home">Home</a>
+    </div>
+
+    <div class="finale-atmosphere" id="finaleAtmosphere"></div>
+
+    <a class="finale-feedback" id="finaleFeedback" href="#">FEEDBACK</a>
+
+    <div class="finale-buttons" id="finaleButtons">
+        <a class="finale-btn" href="#">FOLLOW</a>
+        <a class="finale-btn" href="#">MESSAGE</a>
+    </div>
+
+    <div class="finale-name" id="finaleName">
+        <h2>NOORA BAHROZ</h2>
+        <div class="subtitle">SOFTWARE DEVELOPER</div>
+    </div>
+
+    <img class="finale-char" id="finaleChar" src="Jinx 1.png" alt="Noora Bahroz" />
+
+    <nav class="finale-nav" id="finaleNav">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Portfolio</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="finale-bottom" id="finaleBottom">
+        <div class="copyright">© 2026 All Rights Reserved</div>
+        <div class="legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const characterContainer = document.getElementById('characterContainer');
+    const portfolioText = document.getElementById('portfolioText');
+    const nameSection = document.getElementById('nameSection');
+    const nameEl = document.getElementById('nameEl');
+    const titleEl = document.getElementById('titleEl');
+    const scene = document.getElementById('scene');
+    const contentLeft = document.getElementById('contentLeft');
+    const heroHeading = document.getElementById('heroHeading');
+    const heroSubtitle = document.getElementById('heroSubtitle');
+    const aboutText = document.getElementById('aboutText');
+    const socialIcons = document.getElementById('socialIcons');
+    const welcomeText = document.getElementById('welcomeText');
+    const testimonials = document.getElementById('testimonials');
+    const clientLoveTitle = document.getElementById('clientLoveTitle');
+    const clientLoveSubtitle = document.getElementById('clientLoveSubtitle');
+    const scrollIndicator = document.getElementById('scrollIndicator');
+    const container = document.querySelector('.pin-wrap');
+
+    let isScrolled = false;
+    let marquee1Running = false;
+    let marquee2Running = false;
+    let centerX = window.innerWidth / 2;
+    let centerY = window.innerHeight / 2;
+
+    const handleMouseMove = (e) => {
+        if (isScrolled) return;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const relX = mouseX - centerX;
+        const relY = mouseY - centerY;
+        const perspectiveX = (relX / centerX) * 20;
+        const perspectiveY = (relY / centerY) * 20;
+        gsap.to(scene, {
+            rotationX: perspectiveY * 0.5,
+            rotationY: perspectiveX * 0.5,
+            duration: 0.6,
+            ease: 'power2.out',
+        });
+        gsap.to(characterContainer, {
+            x: relX * 0.3,
+            y: relY * 0.3,
+            duration: 0.6,
+            ease: 'power2.out',
+        });
+        const distance = Math.sqrt(relX ** 2 + relY ** 2);
+        const normalizedDistance = Math.min(distance / 400, 1);
+        gsap.to(portfolioText, {
+            y: -normalizedDistance * 100,
+            opacity: 0.7 + normalizedDistance * 0.2,
+            duration: 0.8,
+            ease: 'power2.out',
+        });
+    };
+
+    const handleMouseLeave = () => {
+        if (isScrolled) return;
+        gsap.to(scene, { rotationX: 0, rotationY: 0, duration: 0.8, ease: 'power2.out' });
+        gsap.to(characterContainer, { x: 0, y: 0, duration: 0.8, ease: 'power2.out' });
+        gsap.to(portfolioText, { y: 0, opacity: 0.7, duration: 0.8, ease: 'power2.out' });
+    };
+
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseleave', handleMouseLeave);
+
+    window.addEventListener('resize', () => {
+        centerX = window.innerWidth / 2;
+        centerY = window.innerHeight / 2;
+    });
+
+    // Initial centering via GSAP to avoid CSS transform conflicts
+    gsap.set(characterContainer, { xPercent: -50, yPercent: -50, top: '50%', left: '50%' });
+    gsap.set(portfolioText, { xPercent: -50, yPercent: -50, top: '50%', left: '50%' });
+    gsap.set(contentLeft, { y: 30 });
+
+    const socialLinks = socialIcons.querySelectorAll('.social-icon');
+
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.pin-wrap',
+            start: 'top top',
+            end: '+=400%',
+            pin: true,
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+                isScrolled = self.progress > 0.08;
+                if (self.progress > 0.99 && !marquee1Running) {
+                    marquee1.play();
+                    marquee1Running = true;
+                }
+                if (self.progress > 1.0 && !marquee2Running) {
+                    marquee2.play();
+                    marquee2Running = true;
+                }
+                if (self.progress < 0.94 && marquee1Running) {
+                    marquee1.pause();
+                    marquee1Running = false;
+                }
+                if (self.progress < 0.96 && marquee2Running) {
+                    marquee2.pause();
+                    marquee2Running = false;
+                }
+            },
+        }
+    });
+
+    // 1. Background PORTFOLIO text — fade out upward
+    tl.to(portfolioText, {
+        y: -250,
+        opacity: 0,
+        ease: 'power2.out',
+    }, 0);
+
+    // 2. Scroll indicator — fade out
+    tl.to(scrollIndicator, {
+        opacity: 0,
+        ease: 'power2.out',
+    }, 0);
+
+    // 3. Character — center to right side, slight scale down
+    tl.to(characterContainer, {
+        x: window.innerWidth * 0.3,
+        y: 0,
+        scale: 0.85,
+        ease: 'power3.out',
+    }, 0);
+
+    // 4. Name section — move up and become heading
+    tl.to(nameSection, {
+        y: -180,
+        opacity: 0,
+        ease: 'power2.out',
+    }, 0);
+
+    // 5. Scene rotation — reset
+    tl.to(scene, {
+        rotationX: 0,
+        rotationY: 0,
+        ease: 'power2.out',
+    }, 0);
+
+    // 6. Content left — fade in and slide up
+    tl.to(contentLeft, {
+        y: 0,
+        opacity: 1,
+        ease: 'power3.out',
+    }, 0.15);
+
+    // 7. Social icons — appear instantly with content
+    tl.fromTo(socialLinks, {
+        y: 15,
+        opacity: 0,
+    }, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.03,
+        ease: 'power2.out',
+    }, 0.15);
+
+    // ─── THIRD STAGE: Character returns to center stage ───
+
+    // 8. Character — right side → center, scale up for hero focus
+    tl.to(characterContainer, {
+        x: 0,
+        scale: 1.08,
+        ease: 'power3.out',
+    }, 0.6);
+
+    // 9. Character z-index — on top of everything
+    tl.set(characterContainer, {
+        zIndex: 100,
+    }, 0.6);
+
+    // 10. Left content — fade out BEFORE welcome appears, then hide completely
+    tl.to(contentLeft, {
+        opacity: 0,
+        y: -40,
+        ease: 'none',
+        duration: 0.15,
+    }, 0.30);
+    tl.set(contentLeft, { visibility: 'hidden', pointerEvents: 'none' }, 0.46);
+    tl.set(contentLeft, { opacity: 0 }, 1.0);
+
+    // 11. WELCOME — fade in immediately after description hides
+    tl.fromTo(welcomeText,
+        { opacity: 0, y: 30 },
+        { opacity: 0.6, y: 0, ease: 'power2.out', duration: 0.15 },
+        0.46
+    );
+
+    // 12. WELCOME — hold stable on screen
+    tl.to(welcomeText, {
+        opacity: 0.6,
+        duration: 0.29,
+    }, 0.61);
+
+    // 13. WELCOME — clean exit
+    tl.to(welcomeText, {
+        y: -60,
+        opacity: 0,
+        ease: 'power2.in',
+    }, 0.92);
+
+    // 14. Character — fade out after WELCOME exits
+    tl.to(characterContainer, {
+        opacity: 0,
+        scale: 0.7,
+        ease: 'power2.in',
+    }, 0.92);
+
+    // ─── TESTIMONIALS: Marquee Animations ───
+
+    const track1 = document.getElementById('marqueeTrack1');
+    const track2 = document.getElementById('marqueeTrack2');
+
+    // Create paused marquee animations
+    const marquee1 = gsap.fromTo(track1, { x: '0%' }, {
+        x: '-50%',
+        ease: 'none',
+        repeat: -1,
+        duration: 35,
+        paused: true,
+    });
+
+    const marquee2 = gsap.fromTo(track2, { x: '-50%' }, {
+        x: '0%',
+        ease: 'none',
+        repeat: -1,
+        duration: 28,
+        paused: true,
+    });
+
+    // ─── FOURTH STAGE: CLIENT LOVE (part of same timeline) ───
+
+    // 15. Testimonials container — become visible
+    tl.to(testimonials, {
+        opacity: 1,
+        ease: 'power2.out',
+    }, 0.96);
+
+    // 16. CLIENT LOVE title — rises from bottom
+    tl.to(clientLoveTitle, {
+        y: 0,
+        opacity: 1,
+        ease: 'power3.out',
+    }, 0.98);
+
+    // 17. Subtitle — follows with stagger
+    tl.to(clientLoveSubtitle, {
+        y: 0,
+        opacity: 1,
+        ease: 'power3.out',
+    }, 1.0);
+
+    // 18. Start marquees after header animation completes
+    tl.call(() => {
+        marquee1.play();
+        marquee1Running = true;
+    }, [], null, 1.0);
+
+    tl.call(() => {
+        marquee2.play();
+        marquee2Running = true;
+    }, [], null, 1.0);
+
+    // ─── MY WORK ScrollTrigger (after pin ends) ───
+
+    const cards = document.querySelectorAll('.project-card');
+    const card1 = document.getElementById('card1');
+    const card2 = document.getElementById('card2');
+    const card3 = document.getElementById('card3');
+    const card4 = document.getElementById('card4');
+
+    // Initialize card positions via GSAP (overrides CSS transforms cleanly)
+    gsap.set(card1, { x: 0, y: -10, rotation: -3 });
+    gsap.set(card2, { x: 0, y: 5, rotation: 5 });
+    gsap.set(card3, { x: 0, y: 20, rotation: -7 });
+    gsap.set(card4, { x: 0, y: 35, rotation: 2 });
+
+    // MY WORK header — fade in on scroll
+    gsap.to('#myWorkHeader', {
+        scrollTrigger: {
+            trigger: '#myWork',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+    });
+
+    // Card scatter timeline
+    const cardTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: '#myWork',
+            start: 'top 60%',
+            end: 'bottom 30%',
+            scrub: 1.2,
+            invalidateOnRefresh: true,
+        }
+    });
+
+    const isMobile = window.innerWidth < 768;
+    const spread = isMobile ? 140 : 320;
+
+    cardTimeline.to(card1, {
+        x: -spread,
+        y: -50,
+        rotation: -15,
+        ease: 'power3.out',
+    }, 0);
+    cardTimeline.to(card2, {
+        x: -spread * 0.6,
+        y: 60,
+        rotation: -8,
+        ease: 'power3.out',
+    }, 0);
+    cardTimeline.to(card3, {
+        x: spread * 0.6,
+        y: -40,
+        rotation: 8,
+        ease: 'power3.out',
+    }, 0);
+    cardTimeline.to(card4, {
+        x: spread,
+        y: 55,
+        rotation: 15,
+        ease: 'power3.out',
+    }, 0);
+
+    // ─── SERVICES Section ───
+
+    const servicesTrack = document.getElementById('servicesTrack');
+
+    const servicesMarquee = gsap.to(servicesTrack, {
+        x: '-50%',
+        ease: 'none',
+        repeat: -1,
+        duration: 40,
+        paused: true,
+    });
+
+    document.querySelectorAll('.service-card').forEach((card, i) => {
+        gsap.to(card, {
+            y: -8 + i * 4,
+            duration: 2.5 + i * 0.4,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+        });
+    });
+
+    gsap.to('#servicesTitle', {
+        scrollTrigger: {
+            trigger: '#services',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+    });
+
+    const colorCycle = gsap.timeline({ repeat: -1, paused: true });
+    colorCycle
+        .to('#agYellow', { opacity: 1, duration: 2, ease: 'power2.inOut' })
+        .to('#agYellow', { opacity: 1, duration: 8, ease: 'none' })
+        .to('#agYellow', { opacity: 0, duration: 2, ease: 'power2.inOut' })
+        .to('#agOrange', { opacity: 1, duration: 2, ease: 'power2.inOut' })
+        .to('#agOrange', { opacity: 1, duration: 8, ease: 'none' })
+        .to('#agOrange', { opacity: 0, duration: 2, ease: 'power2.inOut' })
+        .to('#agPurple', { opacity: 1, duration: 2, ease: 'power2.inOut' })
+        .to('#agPurple', { opacity: 1, duration: 8, ease: 'none' })
+        .to('#agPurple', { opacity: 0, duration: 2, ease: 'power2.inOut' })
+        .to('#agRed', { opacity: 1, duration: 2, ease: 'power2.inOut' })
+        .to('#agRed', { opacity: 1, duration: 8, ease: 'none' })
+        .to('#agRed', { opacity: 0, duration: 2, ease: 'power2.inOut' });
+
+    ScrollTrigger.create({
+        trigger: '#services',
+        start: 'top 80%',
+        end: 'bottom 20%',
+        onEnter: () => {
+            servicesMarquee.play();
+            colorCycle.play();
+        },
+        onLeave: () => {
+            servicesMarquee.pause();
+            colorCycle.pause();
+        },
+        onEnterBack: () => {
+            servicesMarquee.play();
+            colorCycle.play();
+        },
+        onLeaveBack: () => {
+            servicesMarquee.pause();
+            colorCycle.pause();
+        },
+    });
+
+    // ─── CONTACT Section ───
+
+    gsap.to('#contactTitle', {
+        scrollTrigger: {
+            trigger: '#contact',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+    });
+
+    const contactIcons = document.querySelectorAll('.contact-social');
+    gsap.fromTo(contactIcons,
+        { y: 40, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 70%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.12,
+            ease: 'power3.out',
+            duration: 0.8,
+        }
+    );
+
+    const formFields = document.querySelectorAll('.contact-form input, .contact-form textarea');
+    gsap.fromTo(formFields,
+        { y: 30, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 55%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.1,
+            ease: 'power3.out',
+            duration: 0.7,
+        }
+    );
+
+    gsap.fromTo('#contactBtn',
+        { y: 30, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 45%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+        }
+    );
+
+    // ─── FINALE Section ───
+
+    gsap.to('#finaleAtmosphere', {
+        scrollTrigger: {
+            trigger: '#finale',
+            start: 'top 80%',
+            end: 'top 40%',
+            scrub: 1,
+        },
+        opacity: 1,
+        ease: 'power2.out',
+    });
+
+    gsap.to('#finaleChar', {
+        scrollTrigger: {
+            trigger: '#finale',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1.4,
+        ease: 'power3.out',
+    });
+
+    gsap.to('#finaleFeedback', {
+        scrollTrigger: {
+            trigger: '#finale',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+        },
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+    });
+
+    gsap.fromTo('#finaleButtons',
+        { y: 30, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#finale',
+                start: 'top 55%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.9,
+            ease: 'power3.out',
+        }
+    );
+
+    gsap.fromTo('#finaleName',
+        { y: 20, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#finale',
+                start: 'top 45%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+        }
+    );
+
+
+
+    gsap.fromTo('#finaleNav',
+        { y: 20, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#finale',
+                start: 'top 35%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+        }
+    );
+
+    gsap.fromTo('#finaleBottom',
+        { y: 15, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '#finale',
+                start: 'top 30%',
+                toggleActions: 'play none none reverse',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power3.out',
+        }
+    );
+
+    // ─── Finale Floating Nav ───
+
+    const finaleNav = document.getElementById('finaleFloatingNav');
+    let hasReachedFinale = false;
+    let lastScrollY = window.scrollY;
+
+    ScrollTrigger.create({
+        trigger: '#finale',
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+            const currentScrollY = window.scrollY;
+            const scrollingUp = currentScrollY < lastScrollY;
+            lastScrollY = currentScrollY;
+
+            const rect = document.getElementById('finale').getBoundingClientRect();
+            const inFinale = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+
+            if (inFinale && self.progress > 0.15) {
+                hasReachedFinale = true;
+            }
+
+            if (hasReachedFinale && inFinale && scrollingUp) {
+                gsap.to(finaleNav, { opacity: 1, y: 0, pointerEvents: 'auto', duration: 0.5, ease: 'power2.out' });
+            } else if (hasReachedFinale && inFinale && !scrollingUp && self.progress > 0.2) {
+                gsap.to(finaleNav, { opacity: 0, y: -15, pointerEvents: 'none', duration: 0.4, ease: 'power2.out' });
+            } else if (!inFinale) {
+                gsap.to(finaleNav, { opacity: 0, y: -20, pointerEvents: 'none', duration: 0.3, ease: 'power2.out' });
+            }
+        }
+    });
+
+    document.querySelectorAll('.finale-floating-nav a[data-target]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = link.dataset.target;
+            const targets = {
+                home: 0,
+                about: document.querySelector('.pin-wrap').offsetTop,
+                portfolio: document.getElementById('myWork').offsetTop - 50,
+                services: document.getElementById('services').offsetTop - 50,
+                contact: document.getElementById('contact').offsetTop - 50,
+                feedback: document.getElementById('finale').offsetTop - 40,
+            };
+            window.scrollTo({ top: targets[target] || 0, behavior: 'smooth' });
+        });
+    });
+
+    console.log('Noora Bahroz Portfolio — Cinematic Interface Initialized');
+</script>
+</body>
+</html>
